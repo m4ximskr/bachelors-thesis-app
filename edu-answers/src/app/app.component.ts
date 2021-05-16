@@ -9,7 +9,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 
-
 @UntilDestroy()
 @Component({
   selector: 'app-root',
