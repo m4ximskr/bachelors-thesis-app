@@ -1,0 +1,86 @@
+<div class="question-view-wrapper mx-auto">
+  <h1 class="text-center font-bold">Jautājuma pārskats</h1>
+  <div class="question-box p-3 overflow-auto">
+    <div class="header d-flex align-items-center">
+      <mat-icon class="profile-icon s-50 color-light-purple me-3">account_circle</mat-icon>
+      <div class="info">
+        <p class="mb-0 font-bold">{{question?.user_name}}</p>
+        <div class="data d-flex color-dark-gray">
+          <p class="m-0">{{question?.created_at*1000 | date: 'dd/MM/yyyy HH:mm'}} ● {{question?.type | subjectType}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3">
+      <div>
+        <h2 class="text-break font-bold">{{question?.title}}</h2>
+        <p class="text-break">{{question?.desc}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="userStorageService.isAppropriateUser(question?.user_id) || userStorageService.isAdmin()" class="controls d-flex justify-content-end mt-3">
+    <button mat-flat-button type="submit" color="primary" (click)="editQuestion()">Rediģēt</button>
+    <button class="ms-3" mat-flat-button type="submit" color="warn" (click)="deleteQuestion()">Dzēst</button>
+  </div>
+
+  <div *ngIf="userStorageService.userID" class="leave-answer mt-5">
+    <h2 class="mx-auto w-auto">Atstaj atbildi</h2>
+    <form [formGroup]="answerForm"
+          class="d-flex flex-column mt-2"
+          (ngSubmit)="onFormSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Jūsu atbilde</mat-label>
+        <textarea matInput
+               required
+               maxlength="500"
+               formControlName="text"
+               placeholder="Atbilde">
+        </textarea>
+        <mat-error>{{getAnswerErrorMessage}}</mat-error>
+      </mat-form-field>
+      <button class="align-self-end" mat-flat-button type="submit" color="primary"
+              [class.spinner]="loading" [disabled]="loading">Pievienot</button>
+    </form>
+  </div>
+
+  <div class="answers py-5">
+    <h2 class="mx-auto">Atbildes</h2>
+    <div *ngIf="!question?.answers.length">
+      Pagaidam nav atbilzu
+    </div>
+    <div *ngFor="let answer of question?.answers"
+         class="answer-box mt-3 p-2 border-color-{{topStarsAmount && topStarsAmount <= answer.starNumber ? 'green' : 'light-gray'}}">
+
+
+      <div class="header d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <mat-icon class="profile-icon s-40 color-light-purple me-2">account_circle</mat-icon>
+          <div class="info">
+            <p class="mb-0 font-bold">{{answer.user_name}}</p>
+            <div class="data d-flex color-dark-gray">
+              <p class="m-0">{{answer.created_at*1000 | date: 'dd/MM/yyyy HH:mm'}}</p>
+            </div>
+          </div>
+        </div>
+
+        <mat-icon *ngIf="topStarsAmount && topStarsAmount === answer.starNumber" class="grade-icon">grade</mat-icon>
+
+      </div>
+      <div class="mt-2">
+        <p class="text-break">{{answer.text}}</p>
+      </div>
+
+
+
+      <div class="footer d-flex justify-content-between">
+        <div>
+          <button aria-label="Like" mat-icon-button color="warn" (click)="toggleStar(answer)">
+            <mat-icon>{{answer.isStarred ? 'favorite' : 'favorite_border'}}</mat-icon>
+          </button>
+          <span class="font-bold text-uppercase color-red">Paldies {{answer.starNumber}}</span>
+        </div>
+        <button *ngIf="userStorageService.isAppropriateUser(answer?.user_id) || userStorageService.isAdmin()" class="ms-3" mat-flat-button color="warn" (click)="deleteAnswer(answer['_id'])">Dzēst</button>
+      </div>
+    </div>
+  </div>
+</div>

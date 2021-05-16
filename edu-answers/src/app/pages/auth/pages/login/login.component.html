@@ -1,0 +1,28 @@
+<div class="login-wrapper m-auto">
+  <form class="d-flex flex-column p-3"
+        [formGroup]="loginForm"
+        (ngSubmit)="onFormSubmit()">
+    <h1 class="text-center mb-3 font-bold">Ieeja</h1>
+    <mat-form-field appearance="fill">
+      <mat-label>Ē-pasts</mat-label>
+      <input matInput
+             required
+             maxlength="20"
+             formControlName="email"
+             placeholder="Ē-pasts"
+             type="email">
+      <mat-error>{{getEmailErrorMessage}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Parole</mat-label>
+      <input matInput
+             required
+             placeholder="Parole"
+             formControlName="password"
+             type="password">
+      <mat-error>{{getPasswordErrorMessage}}</mat-error>
+    </mat-form-field>
+    <button class="mt-3" mat-flat-button color="primary" type="submit" [class.spinner]="loading" [disabled]="loading">Ieiet</button>
+  </form>
+</div>
+

@@ -1,0 +1,12 @@
+{
+  "LOGO": "hello",
+  "REGISTER": {
+    "TITLE": "Reģistrācija",
+    "NAME": "Vārds",
+    "EMAIL": "Ē-pasts",
+    "PASS": "Parole",
+    "C_PASS": "Ātkārto paroli",
+    "BUTTON": "Reģistrēties"
+  }
+}
+

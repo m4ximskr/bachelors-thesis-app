@@ -1,0 +1,41 @@
+<div class="question-manager-wrapper">
+  <h1 class="text-center font-bold">{{this.data ? 'Rediģē' : 'Pievieno'}} jautājumu</h1>
+  <form class="d-flex flex-column mt-3" [formGroup]="questionForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Atslēgvārdi</mat-label>
+      <input matInput
+             required
+             maxlength="255"
+             formControlName="title"
+             placeholder="Atslāgvārdi">
+      <mat-error>{{getTitleErrorMessage}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Priekšmets</mat-label>
+      <mat-select formControlName="type" required>
+        <mat-option *ngFor="let subject of subjects" [value]="subject.value">
+          {{subject.title}}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{getTypeErrorMessage}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Apraksts</mat-label>
+      <textarea matInput
+                required
+                placeholder="Apraksts"
+                maxlength="1000"
+                rows="10"
+                formControlName="description"></textarea>
+      <mat-error>{{getDescErrorMessage}}</mat-error>
+    </mat-form-field>
+
+    <mat-dialog-actions align="end">
+      <button mat-stroked-button mat-dialog-close>Atpakal</button>
+      <button mat-flat-button color="primary" type="submit" [class.spinner]="loading" [disabled]="loading">
+        {{this.data ? 'Rediģēt': 'Pievienot'}}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>
+

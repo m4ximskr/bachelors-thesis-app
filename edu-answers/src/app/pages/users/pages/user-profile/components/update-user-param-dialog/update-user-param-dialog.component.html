@@ -1,0 +1,29 @@
+<div class="update-user-wrapper">
+  <h1 class="text-center">Rediģē {{data.type === 'name' ? 'vardu' : 'email'}}</h1>
+
+  <form class="d-flex flex-column mt-3" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <mat-form-field *ngIf="data.type === 'name'" appearance="fill">
+      <mat-label>Vards</mat-label>
+      <input matInput
+             required
+             maxlength="20"
+             formControlName="name"
+             placeholder="Vards">
+      <mat-error></mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="data.type === 'email'" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput
+             required
+             formControlName="email"
+             placeholder="Email">
+<!--      <mat-error>{{getEmailErrorMessage}}</mat-error>-->
+    </mat-form-field>
+    <mat-dialog-actions align="end">
+      <button mat-stroked-button mat-dialog-close>Atpakal</button>
+      <button mat-flat-button color="primary" type="submit">Saglabat</button>
+    </mat-dialog-actions>
+
+  </form>
+</div>
+

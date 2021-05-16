@@ -1,0 +1,31 @@
+<div class="question-list-wrapper mx-auto">
+  <h1 class="text-center font-bold">Visi jautājumi</h1>
+  <form class="d-flex flex-column mt-3" [formGroup]="filterForm">
+    <mat-form-field appearance="fill">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-label>Meklēt</mat-label>
+      <input matInput
+             maxlength="20"
+             formControlName="search"
+             placeholder="Search"
+             autocomplete="off">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Izvēlies priekšmetu</mat-label>
+      <mat-select formControlName="filter">
+        <mat-option *ngFor="let subject of subjects" [value]="subject.value">
+          {{subject.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <qna-question-list
+    [questions]="questions"
+    [loading]="loading"
+    [enableLoadMoreBtn]="enableLoadMoreBtn"
+    (loadMore)="loadMore()"
+  ></qna-question-list>
+</div>
+
+

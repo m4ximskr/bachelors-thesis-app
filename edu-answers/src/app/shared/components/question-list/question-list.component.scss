@@ -1,0 +1,19 @@
+
+.question-list {
+  .question-box {
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    height: 220px;
+
+    .header {
+      display: grid;
+      grid-template-columns: min-content minmax(0,300px);
+    }
+
+    .desc-container {
+      max-height: 100px;
+      overflow-y: auto;
+    }
+
+  }
+}

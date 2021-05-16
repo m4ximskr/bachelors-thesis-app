@@ -1,0 +1,10 @@
+<div class="confirmation-wrapper">
+  <h1 class="text-center font-bold">{{data.title}}</h1>
+  <p class="text-center">{{data.desc}}</p>
+
+    <mat-dialog-actions class="d-flex justify-content-center">
+      <button mat-stroked-button mat-dialog-close>Nē</button>
+      <button mat-flat-button color="warn" (click)="confirm()">Jā</button>
+    </mat-dialog-actions>
+</div>
+

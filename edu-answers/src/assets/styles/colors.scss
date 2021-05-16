@@ -1,0 +1,29 @@
+$colorMap: (
+  black: #000,
+  white: #fff,
+  light-gray: #ebf2f7,
+  dark-gray: #717171,
+  //717171
+  red: #da362a,
+  green: #399a3d,
+  light-purple: #7683c5,
+  //7683c5
+);
+
+:root {
+  @each $index, $value in $colorMap {
+    --#{"" + $index}: #{$value};
+
+    .color-#{'' + $index} {
+      color: var(--#{$index});
+    }
+
+    .bg-color-#{'' + $index} {
+      background-color: var(--#{$index});
+    }
+
+    .border-color-#{'' + $index} {
+      border-color: var(--#{$index});
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<div class="users-profile-wrapper mt-5 mx-auto">
+  <h1 class="text-center font-bold">Tavs profils</h1>
+  <div class="user-general-data d-flex flex-column p-3">
+
+    <mat-icon class="profile-icon s-100 mx-auto color-light-purple">account_circle</mat-icon>
+
+    <div class="info mt-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex"><h4 class="font-bold">Vards:</h4><h4 class="ms-3 font-normal">{{userGeneralData?.name}}</h4></div>
+        <button mat-icon-button color="primary" (click)="openDialog('name')"><mat-icon>edit</mat-icon></button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex"><h4 class="font-bold">Email:</h4><h4 class="ms-3 font-normal">{{userGeneralData?.email}}</h4></div>
+        <button mat-icon-button color="primary" (click)="openDialog('email')"><mat-icon>edit</mat-icon></button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex"><h4 class="font-bold">Parole:</h4><h4 class="ms-3 font-normal">• • • • • • • • • • • • •</h4></div>
+        <button mat-icon-button color="primary" (click)="openPasswordDialog()"><mat-icon>edit</mat-icon></button>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="text-center font-bold mt-5">Tavi jautājumi</h1>
+
+  <qna-question-list
+    [questions]="questions"
+    [loading]="loading"
+    [enableLoadMoreBtn]="enableLoadMoreBtn"
+    (loadMore)="loadMore()"
+  ></qna-question-list>
+
+</div>

@@ -1,0 +1,41 @@
+
+  <div class="question-list mx-auto pb-5">
+
+    <h3 *ngIf="!loading && !questions.length" class="text-center">Nav jautajumu</h3>
+
+    <ng-container *ngIf="true">
+
+      <div *ngFor="let question of questions" class="question-box p-2 mt-3 d-flex justify-content-between flex-column align-items-end">
+        <div class="w-100">
+          <div class="header">
+              <mat-icon class="profile-icon s-40 color-light-purple me-2">account_circle</mat-icon>
+              <div class="info">
+<!--                h2-->
+                  <h4 class="text-ellipsis font-bold m-0">{{question?.title}}</h4>
+                <div class="data d-flex color-dark-gray">
+                  <p class="m-0">{{question?.created_at*1000 | date: 'dd/MM/yyyy HH:mm'}} ● {{question?.type | subjectType}}</p>
+                </div>
+              </div>
+          </div>
+          <div class="desc-container mt-3">
+            <p class="text-break m-0">{{question.desc}}</p>
+          </div>
+        </div>
+
+        <a mat-flat-button color="primary" [routerLink]="question['_id']">Skatīt</a>
+
+      </div>
+
+      <div *ngIf="!loading && enableLoadMoreBtn">
+        <button class="d-block mx-auto mt-5" mat-stroked-button color="primary" (click)="loadMore.emit()">Parādīt vairāk</button>
+      </div>
+
+      <div *ngIf="loading" class="d-flex justify-content-center mt-5 h-25">
+        <mat-spinner></mat-spinner>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+

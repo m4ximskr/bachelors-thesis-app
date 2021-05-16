@@ -1,0 +1,53 @@
+<div>
+  <h1 class="text-center font-bold">Visi lietotāji</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Meklēt lietotāju</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput maxlength="20" [formControl]="searchControl" placeholder="Vārds">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Vārds</mat-header-cell>
+      <mat-cell *matCellDef="let row"><div class="text-ellipsis">{{row.name}}</div></mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ēpasts</mat-header-cell>
+      <mat-cell *matCellDef="let row"><div class="text-ellipsis">{{row.email}}</div></mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tips</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.type}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+          <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.preventDefault();$event.stopPropagation();">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngFor="let action of actions" mat-menu-item [disabled]="userStorageService.isAppropriateUser(row._id)" (click)="action.method(row._id)">
+              {{action.name}}
+            </button>
+          </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <!-- Row shdown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Sistēmā nav lietotāju ar vārdu {{searchControl.value}}.</td>
+    </tr>
+  </table>
+
+<!--  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
+</div>
