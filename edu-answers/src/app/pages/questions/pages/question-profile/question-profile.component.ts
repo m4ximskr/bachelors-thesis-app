@@ -56,7 +56,6 @@ export class QuestionProfileComponent implements OnInit {
     this.activatedRoute.data
       .pipe(untilDestroyed(this))
       .subscribe(res => {
-        console.log(res);
         this.prepareQuestionData(res.data);
       });
   }

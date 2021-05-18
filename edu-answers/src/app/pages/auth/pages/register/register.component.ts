@@ -8,7 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 
 @UntilDestroy()
 @Component({
-  selector: 'qna-register',
+  selector: 'edu-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
@@ -79,15 +79,15 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.loading = true;
       const {name, email, password} = this.registerForm.value
-      this.authService.register(name, email, password).subscribe(res => {
-        // console.log(res);
+      this.authService.register(name, email, password).subscribe(() => {
         this.loading = false;
         this.router.navigate(['/auth/login'])
       }, err => {
-        console.log(err);
         this.loading = false;
         this.snackBarService.addNotification(
-          err?.error.keyPattern.email ? 'Lietotājs ar tādu ē-pastu jau eksistē.' : 'Notikusi kļūda reģistrācijas laikā. Mēģiniet vēlreiz.'
+          err?.error.keyPattern.email
+            ? 'Lietotājs ar tādu ē-pastu jau eksistē.'
+            : 'Notikusi kļūda reģistrācijas laikā. Mēģiniet vēlreiz.'
         );
       })
     }

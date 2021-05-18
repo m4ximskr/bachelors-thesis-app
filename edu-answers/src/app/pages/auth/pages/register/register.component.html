@@ -40,6 +40,11 @@
              type="password">
       <mat-error>{{getConfirmPasswordErrorMessage}}</mat-error>
     </mat-form-field>
-    <button class="mt-3" mat-flat-button color="primary" type="submit" [class.spinner]="loading" [disabled]="loading">{{'REGISTER.BUTTON' | translate}}</button>
+    <button class="mt-3" mat-flat-button
+            color="primary"
+            type="submit"
+            [class.spinner]="loading" [disabled]="loading">
+      {{'REGISTER.BUTTON' | translate}}
+    </button>
   </form>
 </div>
